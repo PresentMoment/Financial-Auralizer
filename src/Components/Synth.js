@@ -5,7 +5,6 @@ import DataFetch from "./DataFetch";
 export default class Synth extends Component {
   constructor(props) {
     super(props);
-    this.state = { gasValue: null };
 
     const synth = new Tone.DuoSynth({
       oscillator: {
@@ -32,19 +31,26 @@ export default class Synth extends Component {
         sustain: 0.1,
         release: 0.9
       },
-      volume: -3,
+      volume: -1,
       frequency: 0,
       portamento: 0
     }).toMaster();
+
+    this.state = {
+      gasValue: null,
+      synth: synth
+    };
 
     this.handleClick = () => {
       synth.triggerAttack("C4", "8n");
     };
   }
+
   callbackFunction = childData => {
+    const synth = this.state.synth;
+    synth.set("frequency", childData * 0.1);
     this.setState({ gasValue: childData * 0.1 });
   };
-
   componentDidMount() {
     this.audioContext = new AudioContext();
   }
