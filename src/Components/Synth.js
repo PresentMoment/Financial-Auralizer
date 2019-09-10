@@ -6,32 +6,32 @@ export default class Synth extends Component {
   constructor(props) {
     super(props);
 
-    const synth = new Tone.DuoSynth({
+    const synth = new Tone.AMSynth({
       oscillator: {
         type: "square",
-        modulationType: "square",
-        modulationIndex: 20,
+        modulationType: "sawtooth",
+        modulationIndex: 8,
         vibratomount: 0.5,
-        harmonicity: 0
+        harmonicity: 2
       },
       envelope: {
-        attack: 0.93,
+        attack: 1.03,
         decay: 0.6,
         sustain: 0.03,
-        release: 1.1,
+        release: 1.8,
         attackCurve: "sine"
       },
       modulation: {
-        volume: 0.2,
-        type: "square"
+        volume: 0.9,
+        type: "sine"
       },
       modulationEnvelope: {
-        attack: 2,
-        decay: 0.04,
+        attack: 0.2,
+        decay: 0.4,
         sustain: 0.1,
         release: 0.9
       },
-      volume: -1,
+      volume: 0,
       frequency: 0,
       portamento: 0
     }).toMaster();
@@ -40,28 +40,24 @@ export default class Synth extends Component {
       gasValue: null,
       synth: synth
     };
-
-    this.handleClick = () => {
-      synth.triggerAttack("C4", "8n");
-    };
   }
 
   callbackFunction = childData => {
     const synth = this.state.synth;
-    synth.set("frequency", childData * 0.1);
-    this.setState({ gasValue: childData * 0.1 });
+    synth.set("frequency", childData * -0.3);
+    this.setState({ gasValue: childData * 0.5 });
   };
   componentDidMount() {
     this.audioContext = new AudioContext();
   }
 
   render() {
+    if (this.state.gasValue != null) {
+      this.state.synth.triggerAttackRelease("C4", "8n");
+    }
     console.log(this.state);
     return (
       <div>
-        <button className="Synth" onClick={this.handleClick}>
-          Play
-        </button>
         <DataFetch parentCallback={this.callbackFunction} />
       </div>
     );
