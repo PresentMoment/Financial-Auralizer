@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import data from "../Data/daily_json.json";
 
+//Empty array that will recieve pushed price info from JSON file
 let gasPrices = [];
+
 export default class DataFetch extends Component {
+  //Sends each change in gasPrices array up to parent component at interval defined at end of function
   sendData = () => {
     let i = 0;
     setInterval(() => {
@@ -12,9 +15,10 @@ export default class DataFetch extends Component {
       } else {
         clearInterval();
       }
-    }, 100);
+    }, 10);
   };
 
+  //Filters JSON array for relevant dates and returns only the daily price to gasPrices array
   componentDidMount() {
     const originalData = data;
     originalData.forEach(element => {
