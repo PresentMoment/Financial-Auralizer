@@ -68,8 +68,15 @@ export default class Synth extends Component {
       this.state.synth.disconnect();
     }
     return (
-      <div>
+      <div className="App">
         <DataFetch parentCallback={this.callbackFunction} />
+        <div className="gasPrice">
+          <p>
+            {this.state.gasValue === null
+              ? "Price of Natural Gas"
+              : "$" + this.state.gasValue}
+          </p>
+        </div>
       </div>
     );
   }

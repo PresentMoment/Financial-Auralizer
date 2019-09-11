@@ -45,8 +45,8 @@ export default class DataFetch extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.sendData}>Send Data</button>
+      <div className="DataFetch">
+        <h1 onClick={this.sendData}>Send Data</h1>
       </div>
     );
   }

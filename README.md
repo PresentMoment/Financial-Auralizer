@@ -5,7 +5,6 @@ Raw data is in JSON format. DataFetch.js filters for the years leading up, inclu
 Further implementations:
 
 - Expand data set options
-- Style CSS
 - User controlled rate of playback (setInterval)
 - User can define synth param manipulated by data
 - Deploy

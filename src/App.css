@@ -1,33 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
 .App {
   text-align: center;
+  background: url("./Images/gas.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  width: 80vw;
+  height: 60vh;
+  margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.DataFetch {
+  margin: 0 auto;
+  padding-top: 20vh;
+  font-size: 5em;
+  font-family: "Raleway";
+  color: rgb(235, 90, 90);
+  background-color: rgb(218, 218, 218, 0.3);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.gasPrice {
+  background-color: rgba(250, 238, 221, 0.694);
+  font-family: "Raleway";
+  border-radius: 4px;
+  width: 30%;
+  margin: 0 auto;
 }
