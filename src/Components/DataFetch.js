@@ -5,6 +5,12 @@ import data from "../Data/daily_json.json";
 let gasPrices = [];
 
 export default class DataFetch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dropdown: null
+    };
+  }
   //Sends each change in gasPrices array up to parent component at interval defined at end of function
   sendData = () => {
     let i = 0;
@@ -15,7 +21,11 @@ export default class DataFetch extends Component {
       } else {
         clearInterval();
       }
-    }, 100);
+    }, this.state.dropDown);
+  };
+
+  dropDownChange = e => {
+    this.setState({ dropDown: e.target.value });
   };
 
   //Filters JSON array for relevant dates and returns only the daily price to gasPrices array
@@ -45,8 +55,17 @@ export default class DataFetch extends Component {
 
   render() {
     return (
-      <div className="DataFetch">
-        <h1 onClick={this.sendData}>Send Data</h1>
+      <div>
+        <div className="DataFetch">
+          <h1 onClick={this.sendData}>Send Data</h1>
+        </div>
+        <div className="RateSelect">
+          <select onChange={this.dropDownChange}>
+            <option value="100">100</option>
+            <option value="10">10</option>
+            <option value="1">1</option>
+          </select>
+        </div>
       </div>
     );
   }
