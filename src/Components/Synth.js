@@ -17,7 +17,7 @@ export default class Synth extends Component {
         harmonicity: 7
       },
       envelope: {
-        attack: 1.03,
+        attack: 0.03,
         decay: 0.6,
         sustain: 0.03,
         release: 1.8,
@@ -58,11 +58,13 @@ export default class Synth extends Component {
   }
 
   render() {
+    console.log(this.state);
     //listens to the state of gasValue and triggers the synth engine once DataFetch begins manipulating the state
     //disconnects synth from master output (computer speakers) once array iteration in DataFetch completes
     if (this.state.gasValue != null) {
       this.state.synth.triggerAttackRelease("C4", "8n");
     } else if (this.state.gasValue === undefined) {
+      Audio.masterGainNode.gain.setValueAtTime(0);
       this.state.synth.disconnect();
     }
     return (

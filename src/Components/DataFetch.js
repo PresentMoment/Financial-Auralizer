@@ -15,7 +15,7 @@ export default class DataFetch extends Component {
       } else {
         clearInterval();
       }
-    }, 10);
+    }, 100);
   };
 
   //Filters JSON array for relevant dates and returns only the daily price to gasPrices array

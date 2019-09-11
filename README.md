@@ -9,6 +9,3 @@ Further implementations:
 - User controlled rate of playback (setInterval)
 - User can define synth param manipulated by data
 - Deploy
-
-Bugs:
-"Failed to execute 'setValueAtTime' on 'AudioParam': The provided float value is non-finite." Error when array loop completes.
