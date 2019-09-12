@@ -2,9 +2,7 @@
   "name": "finsounds",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.stlouisfed.org/fred/series/",
   "dependencies": {
-    "axios": "^0.19.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",

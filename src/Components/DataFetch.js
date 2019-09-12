@@ -99,20 +99,20 @@ export default class DataFetch extends Component {
     return (
       <div>
         <div className="DataFetch">
+          <div className="DataSelect">
+            <p>Select Data Set:</p>
+            <select onChange={this.dataDropDown}>
+              <option value="gasPrices">Crude Oil Prices</option>
+              <option value="volatilityData">Volatility Index</option>
+            </select>
+            <p>Select Playback Rate:</p>
+            <select onChange={this.dropDownChange}>
+              <option value="1000">1000 milliseconds</option>
+              <option value="100">100 milliseconds</option>
+              <option value="10">10 milliseconds</option>
+            </select>
+          </div>
           <h1 onClick={this.sendData}>Send Data</h1>
-        </div>
-        <div className="DataSelect">
-          <select onChange={this.dataDropDown}>
-            <option value="gasPrices">Crude Oil Prices</option>
-            <option value="volatilityData">Volatility Index</option>
-          </select>
-        </div>
-        <div className="RateSelect">
-          <select onChange={this.dropDownChange}>
-            <option value="1000">1000</option>
-            <option value="100">100</option>
-            <option value="10">10</option>
-          </select>
         </div>
       </div>
     );

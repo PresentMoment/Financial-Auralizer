@@ -56,10 +56,6 @@ export default class Synth extends Component {
     this.setState({ gasValue: childData });
   };
 
-  pause = () => {
-    this.state.synth.disconnect();
-  };
-
   //audioContext starts the web audio engine at mounting to avoid browser errors when the synth is triggered
   componentDidMount() {
     this.audioContext = new AudioContext();
@@ -77,9 +73,6 @@ export default class Synth extends Component {
     return (
       <div className="App">
         <DataFetch parentCallback={this.callbackFunction} />
-        <button onClick={this.pause}>
-          <h3>STOP</h3>
-        </button>
         <div className="gasPrice">
           <p>
             {this.state.gasValue === null

@@ -4,6 +4,5 @@ Raw data is in JSON format. DataFetch.js filters for the years leading up, inclu
 
 Further implementations:
 
-- Expand data set options
-- User can define synth param manipulated by data
+- Display ticker should respond to individual data sets
 - Deploy
