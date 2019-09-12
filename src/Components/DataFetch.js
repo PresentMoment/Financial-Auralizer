@@ -1,37 +1,56 @@
 import React, { Component } from "react";
-import data from "../Data/daily_json.json";
+import gasData from "../Data/gasprices.json";
+import voaltility from "../Data/volatility.json";
 
-//Empty array that will recieve pushed price info from JSON file
+//Empty arrays that will recieve pushed price info from JSON file
 let gasPrices = [];
+let volatilityData = [];
 
 export default class DataFetch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdown: null
+      dropdown: null,
+      dataSet: "gasPrices"
     };
   }
   //Sends each change in gasPrices array up to parent component at interval defined at end of function
   sendData = () => {
     let i = 0;
-    setInterval(() => {
-      if (i < gasPrices.length) {
-        i++;
-        this.props.parentCallback(gasPrices[i]);
-      } else {
-        clearInterval();
-      }
-    }, this.state.dropDown);
+    if (this.state.dataSet === "gasPrices") {
+      setInterval(() => {
+        if (i < gasPrices.length) {
+          i++;
+          this.props.parentCallback(gasPrices[i]);
+        } else {
+          clearInterval();
+        }
+      }, this.state.dropDown);
+    } else {
+      setInterval(() => {
+        if (i < volatilityData.length) {
+          i++;
+          this.props.parentCallback(volatilityData[i]);
+        } else {
+          clearInterval();
+        }
+      }, this.state.dropDown);
+    }
   };
 
   dropDownChange = e => {
     this.setState({ dropDown: e.target.value });
   };
 
+  dataDropDown = e => {
+    this.setState({ dataSet: e.target.value });
+  };
+
   //Filters JSON array for relevant dates and returns only the daily price to gasPrices array
   componentDidMount() {
-    const originalData = data;
-    originalData.forEach(element => {
+    //fetch gas price data from JSON
+    const originalGasData = gasData;
+    originalGasData.forEach(element => {
       if (
         element.Date.includes("2006") ||
         element.Date.includes("2007") ||
@@ -51,6 +70,29 @@ export default class DataFetch extends Component {
         gasPrices.push(element.Price);
       }
     });
+
+    //fetch voaltility data from JSON
+    const originalVolatility = voaltility;
+    originalVolatility.forEach(element => {
+      if (
+        element.Date.includes("2006") ||
+        element.Date.includes("2007") ||
+        element.Date.includes("2008") ||
+        element.Date.includes("2009") ||
+        element.Date.includes("2010") ||
+        element.Date.includes("2011") ||
+        element.Date.includes("2012") ||
+        element.Date.includes("2013") ||
+        element.Date.includes("2014") ||
+        element.Date.includes("2015") ||
+        element.Date.includes("2016") ||
+        element.Date.includes("2017") ||
+        element.Date.includes("2018") ||
+        element.Date.includes("2019")
+      ) {
+        volatilityData.push(element["VIX Close"]);
+      }
+    });
   }
 
   render() {
@@ -58,6 +100,12 @@ export default class DataFetch extends Component {
       <div>
         <div className="DataFetch">
           <h1 onClick={this.sendData}>Send Data</h1>
+        </div>
+        <div className="DataSelect">
+          <select onChange={this.dataDropDown}>
+            <option value="gasPrices">Crude Oil Prices</option>
+            <option value="volatilityData">Volatility Index</option>
+          </select>
         </div>
         <div className="RateSelect">
           <select onChange={this.dropDownChange}>
