@@ -61,9 +61,9 @@ export default class DataFetch extends Component {
         </div>
         <div className="RateSelect">
           <select onChange={this.dropDownChange}>
+            <option value="1000">1000</option>
             <option value="100">100</option>
             <option value="10">10</option>
-            <option value="1">1</option>
           </select>
         </div>
       </div>
