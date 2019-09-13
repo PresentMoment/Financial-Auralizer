@@ -43,7 +43,9 @@ export default class DataFetch extends Component {
   };
 
   dataDropDown = e => {
+    let data = e.target.value;
     this.setState({ dataSet: e.target.value });
+    this.props.selectedData(data);
   };
 
   //Filters JSON array for relevant dates and returns only the daily price to gasPrices array

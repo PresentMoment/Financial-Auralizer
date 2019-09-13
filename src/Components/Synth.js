@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Tone from "tone";
 import DataFetch from "./DataFetch";
 
+let textBox = "";
+
 export default class Synth extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +43,7 @@ export default class Synth extends Component {
     //gasValue is used to start sound engine when DataFetch changes state from null
     this.state = {
       gasValue: null,
+      dataSet: "gasPrices",
       synth: synth
     };
   }
@@ -54,6 +57,10 @@ export default class Synth extends Component {
     } else {
     }
     this.setState({ gasValue: childData });
+  };
+
+  dataDisplay = propsData => {
+    this.setState({ dataSet: propsData });
   };
 
   //audioContext starts the web audio engine at mounting to avoid browser errors when the synth is triggered
@@ -70,15 +77,29 @@ export default class Synth extends Component {
       // Audio.masterGainNode.gain.setValueAtTime(0);
       this.state.synth.triggerRelease();
     }
+
+    //checks to see what data set is being passed up through props and sets data ticker display accordingly, clears out when array is fully iterated
+    if (this.state.gasValue === null && this.state.dataSet === "gasPrices") {
+      this.textBox = "Price of Natural Gas";
+    } else if (
+      this.state.gasValue === null &&
+      this.state.dataSet === "volatilityData"
+    ) {
+      this.textBox = "Volatility Index";
+    } else if (this.state.gasValue === undefined) {
+      this.textBox = "";
+    } else {
+      this.textBox = "$" + this.state.gasValue;
+    }
+
     return (
       <div className="App">
-        <DataFetch parentCallback={this.callbackFunction} />
+        <DataFetch
+          parentCallback={this.callbackFunction}
+          selectedData={this.dataDisplay}
+        />
         <div className="gasPrice">
-          <p>
-            {this.state.gasValue === null
-              ? "Price of Natural Gas"
-              : "$" + this.state.gasValue}
-          </p>
+          <p>{this.textBox}</p>
         </div>
       </div>
     );
