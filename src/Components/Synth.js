@@ -27,7 +27,7 @@ export default class Synth extends Component {
       },
       modulation: {
         volume: 0.9,
-        type: "sine"
+        type: "triangle"
       },
       modulationEnvelope: {
         attack: 0.2,
@@ -53,7 +53,7 @@ export default class Synth extends Component {
   callbackFunction = childData => {
     const synth = this.state.synth;
     if (typeof childData === "number") {
-      synth.set("oscillator", { frequency: childData * -0.6 });
+      synth.set("oscillator", { frequency: childData });
     } else {
     }
     this.setState({ gasValue: childData });
@@ -72,7 +72,7 @@ export default class Synth extends Component {
     //listens to the state of gasValue and triggers the synth engine once DataFetch begins manipulating the state
     //disconnects synth from master output (computer speakers) once array iteration in DataFetch completes
     if (this.state.gasValue != null) {
-      this.state.synth.triggerAttackRelease("C4", "8n");
+      this.state.synth.triggerAttackRelease("C2", "8n");
     } else if (this.state.gasValue === undefined) {
       // Audio.masterGainNode.gain.setValueAtTime(0);
       this.state.synth.triggerRelease();
